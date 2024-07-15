@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev #to set the dev profil as an active
+  servlet:
+    multipart: # Multipart refers to handling HTTP requests and responses that contain
+              #multiple parts, each of which may contain textual data or binary files.
+      max-file-size: 50MB
+springdoc:
+  default-produces-media-type: application/json # responses will be in json format
+
+
+server:
+  servlet:
+    context-path: /api/v1/
+
+

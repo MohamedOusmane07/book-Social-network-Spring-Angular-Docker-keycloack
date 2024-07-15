@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/book_social_network
+    username:
+    password: Lamine/07
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: localhost
+    port: 1025 # port of our application
+    username: ould
+    password: ooo #not required
+    properties:
+       mail:
+         smtp:
+           trust: "*"
+         auth: true
+         starttls:
+           enable: true # secure connection in the context of sending mails
+         connectiontimeout: 5000
+         timeout: 3000
+         writetimeout: 5000
