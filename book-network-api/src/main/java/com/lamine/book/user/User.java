@@ -1,11 +1,13 @@
 package com.lamine.book.user;
 
+import com.lamine.book.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -33,7 +36,9 @@ public class User implements UserDetails, Principal {
     private String password;
     private Boolean accountLocked;
     private Boolean enabled;
-    //private List<Role> roles;
+
+    @ManyToMany(fetch = FetchType.EAGER) // The roles associated with this entity will be loaded automatically and immediately when the main entity is retrieved from the database
+    private List<Role> roles;
 
     @CreatedDate // it automatically audited the entity
     @Column(nullable = false, updatable = false)
@@ -53,7 +58,10 @@ public class User implements UserDetails, Principal {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roles
+                .stream()
+                .map(r->new SimpleGrantedAuthority(r.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
