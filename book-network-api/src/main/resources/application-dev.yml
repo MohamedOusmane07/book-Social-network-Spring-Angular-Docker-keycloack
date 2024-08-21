@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/book_social_network
-    username:
-    password: Lamine/07
+    username: postgres
+    password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -16,7 +16,7 @@ spring:
   mail:
     host: localhost
     port: 1025 # port of our application
-    username: ould
+    username: lamine
     password: ooo #not required
     properties:
        mail:
@@ -28,3 +28,10 @@ spring:
          connectiontimeout: 5000
          timeout: 3000
          writetimeout: 5000
+
+
+application:
+  security:
+    jwt:
+      secret-key: EC9qxeu73j8pXl/reiWyXTWc/5xg7GRbCk6Mjsxh12I=
+      expiration : 8640000

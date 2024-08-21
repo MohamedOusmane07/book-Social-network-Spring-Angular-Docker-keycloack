@@ -3,14 +3,14 @@ services:
     container_name: postgres-sql-bsn
     image: postgres
     environment:
-      POSTGRES_USER : username
-      POSTGRES_PASSWORD: password
-      PGDATA: /Library/PostgreSQL/16/data
+      POSTGRES_USER : postgres
+      POSTGRES_PASSWORD: 1234
+      PGDATA: /Library/PostgreSQL/15/data
       POSTGRES_DB: book_social_network
     volumes:
       - postgres:/data/postgres
     ports:
-      - 5432:5432
+      - 5433:5433
     networks:
       - spring-demo
     restart: unless-stopped
@@ -20,7 +20,10 @@ services:
     ports:
       - 1080:1080
       - 1025:1025
-      -
+
+
+
+
 
 networks:
   spring-demo:
