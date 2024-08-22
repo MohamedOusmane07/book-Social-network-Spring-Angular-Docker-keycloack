@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "_user")
 @EntityListeners(AuditingEntityListener.class) //EntityListener specifies the listener of an Entity. it can automatically save when the user has been created, modified, .... it ensures traceability and data management
 /* So Again if we have this annotation @EntityListeners(AuditingEntityListener.class), always think about going to our
   application configuration (main class) and add @EnableJpaAuditing*/
@@ -94,7 +94,7 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
 
-    private String fullName(){
+    public String fullName(){
         return firstname + " " + lastname;
     }
 }

@@ -2,6 +2,7 @@ package com.lamine.book.role;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lamine.book.user.User;
 import jakarta.persistence.*;
 import lombok.*;
