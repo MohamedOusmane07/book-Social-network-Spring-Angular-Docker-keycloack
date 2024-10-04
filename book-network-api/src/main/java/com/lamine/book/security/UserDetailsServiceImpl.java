@@ -1,6 +1,5 @@
 package com.lamine.book.security;
 
-
 import com.lamine.book.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,15 +11,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
+  @Override
+  public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 
-    @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-
-
-        return userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("Use" +
-                        "r not found with username: " + userEmail));
-    }
+    return userRepository
+        .findByEmail(userEmail)
+        .orElseThrow(
+            () -> new UsernameNotFoundException("Use" + "r not found with username: " + userEmail));
+  }
 }
