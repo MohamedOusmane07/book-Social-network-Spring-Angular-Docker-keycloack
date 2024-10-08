@@ -3,6 +3,7 @@ package com.lamine.book.handler;
 import static com.lamine.book.handler.BookException.*;
 import static org.springframework.http.HttpStatus.*;
 
+import com.lamine.book.exception.OperationNotPermittedException;
 import jakarta.mail.MessagingException;
 import java.util.HashSet;
 import java.util.Set;
@@ -80,5 +81,12 @@ public class GlobalExceptionHandler {
                 .businessErrorDescription("Internal Error, contact the admin")
                 .error(exp.getMessage())
                 .build());
+  }
+
+  @ExceptionHandler(OperationNotPermittedException.class)
+  public ResponseEntity<ExceptionResponse> handleException(OperationNotPermittedException exp) {
+
+    return ResponseEntity.status(BAD_REQUEST)
+        .body(ExceptionResponse.builder().error(exp.getMessage()).build());
   }
 }

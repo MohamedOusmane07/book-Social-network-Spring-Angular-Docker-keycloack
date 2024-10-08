@@ -19,10 +19,8 @@ import lombok.experimental.SuperBuilder;
 @Entity
 public class BookTransactionHistory extends BaseEntity {
 
-  @ManyToOne
-  private User user;
-  @ManyToOne
-  private Book book;
+  @ManyToOne private User user;
+  @ManyToOne private Book book;
 
   private boolean returned;
   private boolean returnedApproved;

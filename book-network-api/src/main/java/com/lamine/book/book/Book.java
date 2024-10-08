@@ -24,8 +24,8 @@ public class Book extends BaseEntity {
   private String isbn;
   private String synopsis;
   private String bookCover;
-  private Boolean archived;
-  private Boolean shareable;
+  private boolean archived;
+  private boolean shareable;
 
   @ManyToOne private User owner;
 
@@ -36,15 +36,11 @@ public class Book extends BaseEntity {
   private List<BookTransactionHistory> histories;
 
   @Transient
-  public double getRate(){
-    if (feedBacks == null || feedBacks.isEmpty()){
+  public double getRate() {
+    if (feedBacks == null || feedBacks.isEmpty()) {
       return 0.0;
-    }
-    else {
-      var rate=feedBacks.stream()
-              .mapToDouble(FeedBack::getNote)
-              .average()
-              .orElse(0.0); // 4.21
+    } else {
+      var rate = feedBacks.stream().mapToDouble(FeedBack::getNote).average().orElse(0.0); // 4.21
 
       return Math.round(rate);
     }

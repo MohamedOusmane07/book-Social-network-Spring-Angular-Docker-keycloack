@@ -7,16 +7,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BookResponse {
+public class BorrowedBookResponse {
 
   private Integer id;
   private String title;
   private String authorName;
-  private String synospis;
   private String isbn;
-  private String owner;
-  private byte[] cover;
   private double rate;
-  private Boolean archived;
-  private Boolean shareable;
+  private boolean returned;
+  private boolean returnApproved;
 }
