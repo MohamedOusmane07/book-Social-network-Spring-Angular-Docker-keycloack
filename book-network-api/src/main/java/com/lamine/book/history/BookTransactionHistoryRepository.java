@@ -46,4 +46,15 @@ public interface BookTransactionHistoryRepository
     AND history.returned=false
 """)
   Optional<BookTransactionHistory> findByBookIdAndUserId(Integer bookId, Integer userId);
+
+
+  @Query("""
+    SELECT bookTransaction
+    FROM BookTransactionHistory bookTransaction
+    WHERE bookTransaction.book.id=:bookId
+    AND bookTransaction.book.owner.id=:ownerId
+    AND bookTransaction.returned=true
+    AND bookTransaction.returnedApproved=false
+""")
+  Optional<BookTransactionHistory> findByBookIdAndOwner(Integer bookId, Integer ownerId);
 }
