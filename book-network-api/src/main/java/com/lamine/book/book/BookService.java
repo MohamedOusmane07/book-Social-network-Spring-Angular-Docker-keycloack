@@ -198,25 +198,29 @@ public class BookService {
 
   public Integer returnApprovedBook(Integer bookId, Authentication connectedUser) {
     User user = (User) connectedUser.getPrincipal();
-    BookTransactionHistory bookTransactionHistory=bookTransactionHistoryRepository.findByBookIdAndOwner(bookId,user.getId()).orElseThrow(
-            () -> new EntityNotFoundException("BookTransactionHistory with ID : " + bookId + " not found")
-    );
+    BookTransactionHistory bookTransactionHistory =
+        bookTransactionHistoryRepository
+            .findByBookIdAndOwner(bookId, user.getId())
+            .orElseThrow(
+                () ->
+                    new EntityNotFoundException(
+                        "BookTransactionHistory with ID : " + bookId + " not found"));
     bookTransactionHistory.setReturnedApproved(true);
     return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
   }
 
-  public void uploadBookCoverPicture(MultipartFile file, Authentication connectedUser, Integer bookId) {
+  public void uploadBookCoverPicture(
+      MultipartFile file, Authentication connectedUser, Integer bookId) {
 
     Book book =
-            bookRepository
-                    .findById(bookId)
-                    .orElseThrow(
-                            () -> new EntityNotFoundException("Book with ID : " + bookId + " not found"));
+        bookRepository
+            .findById(bookId)
+            .orElseThrow(
+                () -> new EntityNotFoundException("Book with ID : " + bookId + " not found"));
     User user = (User) connectedUser.getPrincipal();
 
-    var bookCover= fileStorageService.saveFile(file,user.getId());
+    var bookCover = fileStorageService.saveFile(file, user.getId());
     book.setBookCover(bookCover);
     bookRepository.save(book);
-
   }
 }

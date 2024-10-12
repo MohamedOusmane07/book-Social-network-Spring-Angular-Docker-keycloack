@@ -47,8 +47,8 @@ public interface BookTransactionHistoryRepository
 """)
   Optional<BookTransactionHistory> findByBookIdAndUserId(Integer bookId, Integer userId);
 
-
-  @Query("""
+  @Query(
+      """
     SELECT bookTransaction
     FROM BookTransactionHistory bookTransaction
     WHERE bookTransaction.book.id=:bookId

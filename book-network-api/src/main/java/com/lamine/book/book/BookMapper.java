@@ -1,5 +1,6 @@
 package com.lamine.book.book;
 
+import com.lamine.book.file.FileUtils;
 import com.lamine.book.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,10 @@ public class BookMapper {
         .authorName(book.getAuthorName())
         .isbn(book.getIsbn())
         .owner(book.getOwner().fullName())
-        .shareable(book.getShareable())
-        .archived(book.getArchived())
+        .shareable(book.isShareable())
+        .archived(book.isArchived())
+        .cover(FileUtils.readFileFromLocation(book.getBookCover()))
         .synospis(book.getSynopsis())
-        // cover
         .build();
   }
 

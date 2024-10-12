@@ -86,24 +86,18 @@ public class BookController {
     return ResponseEntity.ok(bookService.returnBorrowBook(bookId, connectedUser));
   }
 
-
   @PatchMapping("/borrow/return/approve/{book-id}")
   public ResponseEntity<Integer> returnApproveBook(
-          @PathVariable("book-id") Integer bookId,
-          Authentication connectedUser
-  ){
-    return ResponseEntity.ok(bookService.returnApprovedBook(bookId,connectedUser));
+      @PathVariable("book-id") Integer bookId, Authentication connectedUser) {
+    return ResponseEntity.ok(bookService.returnApprovedBook(bookId, connectedUser));
   }
-
 
   @PostMapping(value = "/cover/{book-id}", consumes = "multipart/form-data")
   public ResponseEntity<?> uploadBookCoverPicture(
-          @PathVariable("book-id") Integer bookId,
-          @Parameter()
-          @RequestPart("file") MultipartFile file,
-          Authentication connectedUser
-  ){
-    bookService.uploadBookCoverPicture(file,connectedUser,bookId);
+      @PathVariable("book-id") Integer bookId,
+      @Parameter() @RequestPart("file") MultipartFile file,
+      Authentication connectedUser) {
+    bookService.uploadBookCoverPicture(file, connectedUser, bookId);
     return ResponseEntity.accepted().build();
   }
 }
