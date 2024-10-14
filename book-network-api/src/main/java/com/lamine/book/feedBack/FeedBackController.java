@@ -1,6 +1,7 @@
 package com.lamine.book.feedBack;
 
 
+import com.lamine.book.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,14 @@ public class FeedBackController {
         return ResponseEntity.ok(feedBackService.saveFeedback(feedBackRequest,connectUser));
     }
 
-    @GetMapping("/{book-id}")
-    public ResponseEntity<List<FeedBackResponse>> getFeedBackByBook(
+    @GetMapping("/book/{book-id}")
+    public ResponseEntity<PageResponse<FeedBackResponse>> findAllFeedBackByBookId(
             @PathVariable(name = "book-id") Integer bookId,
+            @RequestParam(name = "page" ,defaultValue = "0", required=false) int page,
+            @RequestParam(name = "size" ,defaultValue = "10", required=false) int size,
             Authentication connectUser
     ){
-        return ResponseEntity.ok(feedBackService.getFeedBackByBook(bookId,connectUser));
+        return ResponseEntity.ok(feedBackService.findAllFeedBackByBookId(bookId,page,size,connectUser));
     }
 
 
